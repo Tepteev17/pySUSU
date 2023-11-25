@@ -79,4 +79,27 @@ def hashFunctionRolls(el):
 for el in books3:
     hashTable3[hashFunctionRolls(el)] = el
 
-print(hashTable3[hashFunctionRolls(('The Shining', '1977'))])
+
+
+
+# task 4
+books4 = ["To Kill a Mockingbird", "1984", "The Great Gatsby", "Pride and Prejudice", "The Catcher in the Rye",
+         "Brave New World", "The Lord of the Rings", "The Hobbit", "The Hunger Games", "Harry Potter and the Sorcerer's Stone"]
+hashTable4 = [''] * len(books)
+
+
+for el in books4:
+        hashTable4.insert(hashFunctionMediumSquare(el), el)
+
+print(hashTable4)
+
+
+# task 5
+books5 = ["To Kill a Mockingbird", "1984", "The Great Gatsby", "Pride and Prejudice", "The Catcher in the Rye"]
+hashTable5 = [''] * len(books)
+
+
+for el in books5:
+        hashTable5.insert(hashFunctionRolls(el), el)
+
+print(hashTable5)
