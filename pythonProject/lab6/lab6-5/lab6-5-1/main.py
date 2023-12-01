@@ -1,8 +1,8 @@
-import module_func
+from module_func import *
 
 # основная программа
-module_func.printRectangle(-1, 5, "output")
-module_func.PrintSquare(3, "output1")
+printRectangle(-1, 5, "output")
+PrintSquare(3, "output1")
 
 # Test 1:
 module_func.printRectangle(4, 0, "output")

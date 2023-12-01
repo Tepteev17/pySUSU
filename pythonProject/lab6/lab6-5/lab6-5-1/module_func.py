@@ -1,4 +1,4 @@
-def inCorrectData(a, b=1):
+def inCorrectData(a: int, b=1):
     """ Проверяет корекктность введеных значений a и b
     """
     if a <= 0 or b <= 0:
@@ -6,7 +6,7 @@ def inCorrectData(a, b=1):
         return
 
 
-def printRectangle(a, b, file=False):
+def printRectangle(a: int, b: int, file=False):
     """"Принимает параметры а - ширина, b- длинна, file - название файла
         печатает в файл с именем file
         прямоугольник из символов * со сторонами a и b
@@ -21,7 +21,7 @@ def printRectangle(a, b, file=False):
     f.close()
 
 
-def PrintSquare(a, file=False):
+def PrintSquare(a: int, file=False):
     """"Принимает параметры а - ширина и высота, file - название файла
         печатает в файл с именем file
         прямоугольник из символов * со стороной а

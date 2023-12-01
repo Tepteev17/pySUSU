@@ -11,7 +11,4 @@ def actionsNum(n):
             actionsList.append(num)
     return str(actionsList)
 
-def coorectData(n):
-    if n >= 1:
-        return True
 
