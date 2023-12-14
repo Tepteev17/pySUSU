@@ -35,7 +35,7 @@ def outputData(dataOutput: str):
 
 
 """Основная программа"""
-nameList = os.listdir(r"C:\Users\Иван\PycharmProjects\pySUSU\pythonProject\lab6\lab6-5\lab6-5-3")
+nameList = os.listdir(r"C:\Users\User\PycharmProjects\pySUSU\pythonProject\lab6\lab6-5\lab6-5-3")
 fileOutput = open('output.txt', 'w')
 if 'input.txt' in nameList:
     n = readData()
