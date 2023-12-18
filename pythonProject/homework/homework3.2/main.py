@@ -104,7 +104,7 @@ def number():
 init()
 print(recognize())
 
-# tests
+# tests.txt
 
 # a+b-c;            Correct;    Correct
 # (a*b)+c;          Correct;    Correct

@@ -13,9 +13,10 @@ def recursionStaple(string: str, lenght: int, stack: list, dictStaple: dict):
     if lenght >= 0:
         if el in '[{<(':
             stack.append(dictStaple[el])
-        elif el == stack[-1]:
+        elif len(stack) != 0 and el == stack[-1]:
             stack.remove(el)
         else:
+            stack.append(el)
             return
 
         if lenght == 0:
@@ -30,7 +31,7 @@ def outputData(lenStack: int):
         print('YES', file=f)
         return
     print('NO', file=f)
-
+    print('Программа завершила работу!')
 
 def main():
     """Основная программа"""
