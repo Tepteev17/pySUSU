@@ -5,6 +5,7 @@ from sys import setrecursionlimit
 from prettytable import *
 import random
 
+
 def generateLists(n: int):
     """ Создание трех последовательностей размера N:
         Случайно сгенерированной
@@ -21,7 +22,7 @@ def generateLists(n: int):
     return arrSorted, arrRevSorted, arrGenerate, arrGenerateCopy1, arrGenerateCopy2
 
 
-def exchangeSortProcedure(arrSorted, arrRevSorted, arrGenerate: list, table: list):
+def exchangeSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
     """Принимает случайно сгенерированный список arrGenerate и сущность таблицы
     Выполняет сортировку методом перестановки(пузырька) и
     записывает данные о времени выполнения в таблицу"""
@@ -37,7 +38,7 @@ def exchangeSortProcedure(arrSorted, arrRevSorted, arrGenerate: list, table: lis
     addNewRow(table, ['Сортировка пузырьком', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def shellSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy1: list, table: list):
+def shellSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy1: list, table):
     """Принимает случайно сгенерированный список arrGenerateCopy1 и сущность таблицы
         Выполняет сортировку методом Шелла и
         записывает данные о времени выполнения в таблицу"""
@@ -53,11 +54,10 @@ def shellSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy1: list, table: l
     addNewRow(table, ['Сортировка Shella', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def quickSortProcedure(arrSorted, arrRevSorted,arrGenerateCopy2: list, table: list):
+def quickSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
     """Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
         Выполняет сортировку методом Быстрой сортировки и
         записывает данные о времени выполнения в таблицу"""
-
     timeCompArr = []
     for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
         start_time = time.time()
@@ -70,13 +70,61 @@ def quickSortProcedure(arrSorted, arrRevSorted,arrGenerateCopy2: list, table: li
     addNewRow(table, ['Быстрая сортировка', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
+def builtSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
+    """Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
+        Выполняет сортировку методом встроенной сортировки и
+        записывает данные о времени выполнения в таблицу"""
+    timeCompArr = []
+    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+        start_time = time.time()
+        sortedArr = builtSort(arr)
+        check(arr, sortedArr)
+        end_time = time.time()
+        timeComp = end_time - start_time
+        timeCompArr.append(timeComp)
+
+    addNewRow(table, ['Встроенная сортировка', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+
+
+def selectionSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
+    """ Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
+        Выполняет сортировку методом выбора и
+        записывает данные о времени выполнения в таблицу"""
+    timeCompArr = []
+    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+        start_time = time.time()
+        sortedArr = selectionSort(arr)
+        check(arr, sortedArr)
+        end_time = time.time()
+        timeComp = end_time - start_time
+        timeCompArr.append(timeComp)
+
+    addNewRow(table, ['Сортировка выбором', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+
+
+def mergeSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
+    """ Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
+        Выполняет сортировку методом слияния и
+        записывает данные о времени выполнения в таблицу"""
+    timeCompArr = []
+    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+        start_time = time.time()
+        sortedArr = mergeSort(arr)
+        check(arr, sortedArr)
+        end_time = time.time()
+        timeComp = end_time - start_time
+        timeCompArr.append(timeComp)
+
+    addNewRow(table, ['Сортировка Слиянием', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+
+
 def addNewRow(table: list, row: list):
     """Принимает сущность таблицы и список, который нужно добавить в строку
     Добавляет строку в таблицу"""
     table.add_rows([row])
 
 
-def outData(table: list, arrGenerate: list, f):
+def outData(table, f):
     """Принимает сущность таблицы и файл.
     Выводит таблицы в файл"""
     print(table, file=f, sep='\n')
@@ -94,4 +142,12 @@ arrSorted, arrRevSorted, arrGenerate, arrGenerateCopy1, arrGenerateCopy2 = gener
 exchangeSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
 shellSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy1, table)
 quickSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
-outData(table, arrGenerate, f)
+builtSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
+selectionSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
+
+
+
+
+
+mergeSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
+outData(table, f)

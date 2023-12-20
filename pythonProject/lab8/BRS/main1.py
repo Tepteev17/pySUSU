@@ -21,7 +21,12 @@ def readData(f, arr: list):
         Считывает файл и заносит в arr всех студентов
     """
     for el in f:
-        arr.append(el.split())
+        elems = el.split()
+        fio = '%s %s %s' % (elems[0], elems[1], elems[2])
+        data = [fio]
+        for krm in range(3, len(elems)):
+            data.append(elems[krm])
+        arr.append(data)
 
 
 def calcRandomScore(arr: list):
@@ -50,7 +55,8 @@ def formattedRow(person: list) -> list:
         Возвращает список со всеми данными студента"""
     row = [person[0]]
     for i in range(1, len(person)):
-        row.append(str(person[i][0]) + " \ " + (str(int(100 * int(person[i][0]) / 4))) + '%')
+        strData = ' %s       %s  ' % (str(person[i][0]), (str(int(100 * int(person[i][0]) / 4)) + '%'))
+        row.append(strData)
     row.append(round(brs(person), 2))
     PA = random.randrange(0, 100)
     row.append(PA)
@@ -62,14 +68,18 @@ def formattedRow(person: list) -> list:
 
 def addRows(arr: list, table):
     """Добавляет данные о студенте в таблицу"""
+    table.add_row([' '] + ['Балл    Рейтинг, %']*5 + [' ']*4)
+    table.add_row(['Макс.балл/вес', '4/1', '4/2', '4/3', '4/4', '4/5', ' ', ' ', ' ', ' '])
     for person in arr:
         row = formattedRow(person)
         table.add_row(row)
 
 
 def main():
+    """Основная программа"""
     table = PrettyTable()
-    table.field_names = ['Фио', '1', '2', '3', '4', '5', 'текущий контроль всего', 'Промежуточная аттестация',
+    table.align = 'l'
+    table.field_names = ['Фио', 'КРМ 1', 'КРМ 2', 'КРМ 3', 'КРМ 4', 'КРМ 5', 'текущий контроль всего', 'Промежуточная аттестация',
                          'Рейтинг, %', 'Оценка']
     f = open('input.txt')
     arr = []
