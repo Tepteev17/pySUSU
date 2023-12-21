@@ -4,7 +4,7 @@ import random
 def check(unsortedArr, sortedArr) -> bool:
     """Принимает неотсортированный список unsortedArr и отсортированный список sortedArr.
     Проверяет отсортирвоался ли список"""
-    if unsortedArr != sortedArr:
+    if unsortedArr == sortedArr:
         return True
     return False
 
@@ -13,10 +13,10 @@ def exchangeSort(arr: list) -> list:
     """Принимает неотсортированный список arr.
         Возвращает остортированный список методом перестановки"""
 
-    for run in range(len(arr)-1):
-        for i in range(len(arr)-1):
-            if arr[i] > arr[i+1]:
-                arr[i], arr[i+1] = arr[i+1], arr[i]
+    for run in range(len(arr) - 1):
+        for i in range(len(arr) - 1):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
     return arr
 
 
@@ -35,6 +35,7 @@ def shellSort(arr: list) -> list:
                 j -= gap
             arr[j + gap] = temp
     return arr
+
 
 def quickSort(arr: list) -> list:
     """Принимает неотсортированный список arr.
@@ -61,6 +62,7 @@ def sortSimpleInserts(arr: list) -> list:
             position -= 1
 
     return arr
+print(sortSimpleInserts([10,8,1,4,5,7]))
 
 def builtSort(arr: list) -> list:
     """Сортирует последовательность arr встроенным методом sorted"""
@@ -74,11 +76,12 @@ def selectionSort(arr: list) -> list:
         minValue = i
 
         for j in range(i, len(arr)):
-            if arr[minValue] < arr[j]:
+            if arr[minValue] > arr[j]:
                 minValue = j
-    arr[minValue], arr[i] = arr[i], arr[minValue]
+        arr[minValue], arr[i] = arr[i], arr[minValue]
 
     return arr
+
 
 def splitСonsistency(arr: list) -> list:
     """Разбивает массив на 2 части и возвращает отсортированную часть"""
@@ -92,6 +95,7 @@ def splitСonsistency(arr: list) -> list:
     rightlist = splitСonsistency(rightlist)
 
     return list(mergeConsistency(leftList, rightlist))
+
 
 def mergeConsistency(leftList: list, rightlist: list) -> list:
     """Сортирует две части разделенного массива и склеивает их в одну"""
@@ -116,3 +120,4 @@ def mergeConsistency(leftList: list, rightlist: list) -> list:
 def mergeSort(arr: list) -> list:
     """Выполняет сортировку последовательности методом слияния"""
     return splitСonsistency(arr)
+

@@ -14,108 +14,155 @@ def generateLists(n: int):
     arrGenerate = []
     for i in range(n):
         arrGenerate.append(random.randrange(-100000, 100000))
-    arrGenerateCopy1 = copy.copy(arrGenerate)
-    arrGenerateCopy2 = copy.copy(arrGenerate)
     arrSorted = sorted(arrGenerate)
     arrRevSorted = sorted(arrGenerate, reverse=True)
 
-    return arrSorted, arrRevSorted, arrGenerate, arrGenerateCopy1, arrGenerateCopy2
+    return arrSorted, arrRevSorted, arrGenerate
 
 
 def exchangeSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
     """Принимает случайно сгенерированный список arrGenerate и сущность таблицы
     Выполняет сортировку методом перестановки(пузырька) и
     записывает данные о времени выполнения в таблицу"""
-
+    isSorted = True
+    arrGenerateCopy = copy.copy(arrGenerate)
     timeCompArr = []
-    for arr in [arrSorted, arrGenerate, arrRevSorted]:
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
         start_time = time.time()
         sortedArr = exchangeSort(arr)
-        check(arr, sortedArr)
-        end_time = time.time()
-        timeComp = end_time - start_time
-        timeCompArr.append(timeComp)
-    addNewRow(table, ['Сортировка пузырьком', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
+    if isSorted:
+        addNewRow(table, ['Сортировка пузырьком', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def shellSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy1: list, table):
-    """Принимает случайно сгенерированный список arrGenerateCopy1 и сущность таблицы
+def shellSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
+    """Принимает случайно сгенерированный список  и сущность таблицы
         Выполняет сортировку методом Шелла и
         записывает данные о времени выполнения в таблицу"""
-
+    isSorted = True
+    arrGenerateCopy = copy.copy(arrGenerate)
     timeCompArr = []
-    for arr in [arrSorted, arrGenerateCopy1, arrRevSorted]:
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
         start_time = time.time()
         sortedArr = shellSort(arr)
-        check(arr, sortedArr)
-        end_time = time.time()
-        timeComp = end_time - start_time
-        timeCompArr.append(timeComp)
-    addNewRow(table, ['Сортировка Shella', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
+    if isSorted:
+        addNewRow(table, ['Сортировка Shella', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def quickSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
-    """Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
+def quickSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
+    """Принимает случайно сгенерированный список  и сущность таблицы
         Выполняет сортировку методом Быстрой сортировки и
         записывает данные о времени выполнения в таблицу"""
+    isSorted = True
+    arrGenerateCopy = copy.copy(arrGenerate)
     timeCompArr = []
-    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
         start_time = time.time()
         sortedArr = quickSort(arr)
-        check(arr, sortedArr)
-        end_time = time.time()
-        timeComp = end_time - start_time
-        timeCompArr.append(timeComp)
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
 
-    addNewRow(table, ['Быстрая сортировка', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+    if isSorted:
+        addNewRow(table, ['Быстрая сортировка', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def builtSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
-    """Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
+#  //////////////////////
+def builtSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
+    """Принимает случайно сгенерированный список и сущность таблицы
         Выполняет сортировку методом встроенной сортировки и
         записывает данные о времени выполнения в таблицу"""
+    isSorted = True
+    arrGenerateCopy = copy.copy(arrGenerate)
     timeCompArr = []
-    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
         start_time = time.time()
         sortedArr = builtSort(arr)
-        check(arr, sortedArr)
-        end_time = time.time()
-        timeComp = end_time - start_time
-        timeCompArr.append(timeComp)
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
 
-    addNewRow(table, ['Встроенная сортировка', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+    if isSorted:
+        addNewRow(table, ['Встроенная сортировка', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def selectionSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
-    """ Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
+def selectionSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
+    """ Принимает случайно сгенерированный список  и сущность таблицы
         Выполняет сортировку методом выбора и
         записывает данные о времени выполнения в таблицу"""
+    isSorted = True
+    arrGenerateCopy = copy.copy(arrGenerate)
     timeCompArr = []
-    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
         start_time = time.time()
         sortedArr = selectionSort(arr)
-        check(arr, sortedArr)
-        end_time = time.time()
-        timeComp = end_time - start_time
-        timeCompArr.append(timeComp)
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
 
-    addNewRow(table, ['Сортировка выбором', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+    if isSorted:
+        addNewRow(table, ['Сортировка выбором', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
-def mergeSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerateCopy2: list, table):
+def sortSimpleInsertsProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
+    """ Принимает случайно сгенерированный список и сущность таблицы
+        Выполняет сортировку методом простых вставок и
+        записывает данные о времени выполнения в таблицу"""
+    isSorted = True
+    arrGenerateCopy = copy.copy(arrGenerate)
+    timeCompArr = []
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
+        start_time = time.time()
+        sortedArr = sortSimpleInserts(arr)
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
+
+    if isSorted:
+        addNewRow(table, ['Сортировка простыми вставками', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+
+
+def mergeSortProcedure(arrSorted: list, arrRevSorted: list, arrGenerate: list, table):
     """ Принимает случайно сгенерированный список arrGenerateCopy2 и сущность таблицы
         Выполняет сортировку методом слияния и
         записывает данные о времени выполнения в таблицу"""
+    arrGenerateCopy = copy.copy(arrGenerate)
     timeCompArr = []
-    for arr in [arrSorted, arrGenerateCopy2, arrRevSorted]:
+    isSorted = True
+    for arr in [arrSorted, arrGenerateCopy, arrRevSorted]:
         start_time = time.time()
         sortedArr = mergeSort(arr)
-        check(arr, sortedArr)
-        end_time = time.time()
-        timeComp = end_time - start_time
-        timeCompArr.append(timeComp)
-
-    addNewRow(table, ['Сортировка Слиянием', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
+        if check(sortedArr, arrSorted):
+            end_time = time.time()
+            timeComp = end_time - start_time
+            timeCompArr.append(timeComp)
+        else:
+            isSorted = False
+    if isSorted:
+        addNewRow(table, ['Сортировка Слиянием', timeCompArr[0], timeCompArr[1], timeCompArr[2]])
 
 
 def addNewRow(table: list, row: list):
@@ -137,17 +184,13 @@ table.field_names = ["Метод", "отсортированная", "случа
 n = int(input('Введите число N: '))
 f = open('output.txt', 'w')
 
-arrSorted, arrRevSorted, arrGenerate, arrGenerateCopy1, arrGenerateCopy2 = generateLists(n)
+arrSorted, arrRevSorted, arrGenerate = generateLists(n)
 
 exchangeSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
-shellSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy1, table)
-quickSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
-builtSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
-selectionSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
-
-
-
-
-
-mergeSortProcedure(arrSorted, arrRevSorted, arrGenerateCopy2, table)
+shellSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
+quickSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
+builtSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
+selectionSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
+mergeSortProcedure(arrSorted, arrRevSorted, arrGenerate, table)
+sortSimpleInsertsProcedure(arrSorted, arrRevSorted, arrGenerate, table)
 outData(table, f)
